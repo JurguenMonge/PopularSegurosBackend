@@ -15,8 +15,6 @@ namespace AuthService.Repository
 
         public async Task<User> CreateAsync(User user)
         {
-            if (await _context.Users.AnyAsync(u => u.Email == user.Email)) return null;
-
             await _context.Users.AddAsync(user);
             await _context.SaveChangesAsync();
             return user;

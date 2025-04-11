@@ -25,13 +25,12 @@ namespace AuthService.Controllers
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
 
+            if (await _authRepository.GetByEmailAsync(userRequestDto.Email) != null) return BadRequest("El correo electronico ya está registrado.");
+
             var userModel = userRequestDto.ToUserFromCreateDTO();
             userModel.Password = _authHelper.EncriptarPassword(userRequestDto.Password);
 
-            var result = await _authRepository.CreateAsync(userModel);
-
-            if (result == null) return Conflict("El correo electronico ya está registrado.");
-
+            await _authRepository.CreateAsync(userModel);
             return Ok("Usuario registrado con éxito");
         }
 

@@ -55,6 +55,8 @@ namespace AuthService.Controllers
             return Ok(new
             {
                 message = "Inicio de sesión exitoso",
+                Nombre = $"{user.Nombre} {user.PrimerApellido} {user.SegundoApellido}",
+                user.Rol,
                 token
             });
         }

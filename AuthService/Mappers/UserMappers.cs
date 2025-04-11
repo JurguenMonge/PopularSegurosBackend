@@ -12,6 +12,9 @@ namespace AuthService.Mappers
                 Id = userModel.Id,
                 Email = userModel.Email,
                 Password = userModel.Password,
+                Nombre = userModel.Nombre,
+                PrimerApellido = userModel.PrimerApellido,
+                SegundoApellido = userModel.SegundoApellido,
                 Rol = userModel.Rol,
             };
         }
@@ -21,7 +24,10 @@ namespace AuthService.Mappers
             return new User
             {
                 Email = userDto.Email,
-                Rol = userDto.Rol ?? "User",
+                Nombre = userDto.Nombre,
+                PrimerApellido = userDto.PrimerApellido,
+                SegundoApellido = userDto.SegundoApellido,
+                Rol =  "Admin",
             };
         }
     }

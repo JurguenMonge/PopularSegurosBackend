@@ -10,6 +10,12 @@ namespace AuthService.Models
         public string Email { get; set; } = string.Empty;
         [Required]
         public string Password { get; set; } = string.Empty;
-        public string Rol { get; set; } = "User";
+        [Required]
+        public string Nombre {  get; set; } = string.Empty;
+        [Required]
+        public string PrimerApellido { get; set; } = string.Empty;
+        [Required]
+        public string SegundoApellido { get; set; } = string.Empty;
+        public string Rol { get; set; } = "Admin";
     }
 }

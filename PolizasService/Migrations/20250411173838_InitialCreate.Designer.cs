@@ -12,7 +12,7 @@ using PolizasService.Data;
 namespace PolizasService.Migrations
 {
     [DbContext(typeof(PolizaDbContext))]
-    [Migration("20250411171602_InitialCreate")]
+    [Migration("20250411173838_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />

@@ -4,6 +4,7 @@ using PolizasService.Data;
 using PolizasService.Interfaces;
 using PolizasService.Repository;
 using PolizasService.Services;
+using PolizasService.Utils;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -55,6 +56,13 @@ builder.Services.AddHttpClient<IClientService, ClientService>(client =>
 });
 
 var app = builder.Build();
+
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    var logger = services.GetRequiredService<ILogger<Program>>();
+    await DataSeeder.SeedDataAsync(services, logger);
+}
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

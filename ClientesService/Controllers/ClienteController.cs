@@ -72,6 +72,15 @@ namespace ClientesService.Controllers
                 return NotFound("La persona que quieres actualizar no fue encontrada.");
             }
 
+            if (string.IsNullOrEmpty(updateDto.CedulaAsegurado)
+               || string.IsNullOrEmpty(updateDto.Nombre)
+               || string.IsNullOrEmpty(updateDto.PrimerApellido)
+               || string.IsNullOrEmpty(updateDto.SegundoApellido)
+               || string.IsNullOrEmpty(updateDto.TipoPersona)
+               ) return BadRequest("Ningún campo puede estar vacío");
+
+            if (updateDto.FechaNacimiento > DateOnly.FromDateTime(DateTime.Now)) return BadRequest("La fecha de nacimiento no puede ser mayor a la de hoy");
+
             return Ok("La persona fue actualizada correctamente");
         }
 

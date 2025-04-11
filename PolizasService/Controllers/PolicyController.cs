@@ -24,7 +24,7 @@ namespace PolizasService.Controllers
             var result = await _policyService.GetAllAsync();
             if (!result.Success)
             {
-                return StatusCode(result.StatusCode, result.Message);
+                return BadRequest(result.Message);
             }
 
             return Ok(result.Data);
@@ -38,7 +38,7 @@ namespace PolizasService.Controllers
             var result = await _policyService.CreatePolicyAsync(policyRequestDto);
             if (!result.Success)
             {
-                return StatusCode(result.StatusCode, result.Message);  
+                return BadRequest(result.Message);  
             }
 
             return Ok(result.Message);
@@ -53,7 +53,7 @@ namespace PolizasService.Controllers
             var result = await _policyService.DeleteAsync(idPoliza);
             if (!result.Success)
             {
-                return StatusCode(result.StatusCode, result.Message);
+                return BadRequest(result.Message);
             }
 
             return Ok(result.Message);
@@ -70,7 +70,7 @@ namespace PolizasService.Controllers
 
             if (!result.Success)
             {
-                return StatusCode(result.StatusCode, result.Message);
+                return BadRequest(result.Message);
             }
 
             return Ok(result.Message);

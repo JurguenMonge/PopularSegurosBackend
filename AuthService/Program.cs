@@ -1,6 +1,7 @@
 using AuthService.Data;
 using AuthService.Interfaces;
 using AuthService.Repository;
+using AuthService.Utils;
 using AuthService.Utils.Helpers;
 using Microsoft.EntityFrameworkCore;
 
@@ -30,6 +31,14 @@ builder.Services.AddScoped<AuthHelper>();
 builder.Services.AddScoped<IAuthRepository, AuthRepository>();
 
 var app = builder.Build();
+
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    var logger = services.GetRequiredService<ILogger<Program>>();
+    var authHelper = services.GetRequiredService<AuthHelper>();
+    await DataSeeder.SeedDataAsync(services, logger, authHelper);
+}
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

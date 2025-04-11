@@ -1,6 +1,7 @@
 using ClientesService.Data;
 using ClientesService.Interfaces;
 using ClientesService.Repository;
+using ClientesService.Utils;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -27,6 +28,13 @@ builder.Services.AddDbContext<ClientesDbContext>(options =>
 builder.Services.AddScoped<IClientRepository, ClientRepository>();
 
 var app = builder.Build();
+
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    var logger = services.GetRequiredService<ILogger<Program>>();
+    await DataSeeder.SeedDataAsync(services, logger);
+}
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

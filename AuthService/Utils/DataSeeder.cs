@@ -19,7 +19,7 @@ namespace AuthService.Utils
                 new User
                 {
                     Email = "allfernandez@bp.fi.cr",
-                    Password = authHelper.EncriptarPassword("allfernandez2025"),
+                    Password = authHelper.EncriptarPassword("allFernandez@2025"),
                     Nombre = "Allam",
                     PrimerApellido = "Fernandez",
                     SegundoApellido = "BP",
@@ -28,7 +28,7 @@ namespace AuthService.Utils
                 new User
                 {
                     Email = "alecampos@bp.fi.cr",
-                    Password = authHelper.EncriptarPassword("alecampos2025"),
+                    Password = authHelper.EncriptarPassword("aleCampos@2025"),
                     Nombre = "Alejandro",
                     PrimerApellido = "Campos",
                     SegundoApellido = "BP",

@@ -12,8 +12,8 @@ using PolizasService.Data;
 namespace PolizasService.Migrations
 {
     [DbContext(typeof(PolizaDbContext))]
-    [Migration("20250411002501_Initial")]
-    partial class Initial
+    [Migration("20250411171602_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

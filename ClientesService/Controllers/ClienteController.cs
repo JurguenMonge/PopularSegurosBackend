@@ -41,6 +41,9 @@ namespace ClientesService.Controllers
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
 
+            var clientExist = await _clientRepository.GetByIdAsync(clientDto.CedulaAsegurado);
+            if(clientExist != null) return BadRequest("El cliente que estas creando ya existe");
+
             var clientModel = clientDto.ToClientFromCreateDTO();
             await _clientRepository.CreateAsync(clientModel);
             return Ok("El cliente fue creado correctamente");

@@ -2,6 +2,7 @@
 using ClientesService.Interfaces;
 using ClientesService.Mappers;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
 
 namespace ClientesService.Controllers
 {
@@ -42,7 +43,16 @@ namespace ClientesService.Controllers
             if (!ModelState.IsValid) return BadRequest(ModelState);
 
             var clientExist = await _clientRepository.GetByIdAsync(clientDto.CedulaAsegurado);
-            if(clientExist != null) return BadRequest("El cliente que estas creando ya existe");
+            if (clientExist != null) return BadRequest("El cliente que estas creando ya existe");
+
+            if (string.IsNullOrEmpty(clientDto.CedulaAsegurado)
+                || string.IsNullOrEmpty(clientDto.Nombre)
+                || string.IsNullOrEmpty(clientDto.PrimerApellido)
+                || string.IsNullOrEmpty(clientDto.SegundoApellido)
+                || string.IsNullOrEmpty(clientDto.TipoPersona)
+                ) return BadRequest("Ningún campo puede estar vacío");
+
+            if (clientDto.FechaNacimiento > DateOnly.FromDateTime(DateTime.Now)) return BadRequest("La fecha de nacimiento no puede ser mayor a la de hoy");
 
             var clientModel = clientDto.ToClientFromCreateDTO();
             await _clientRepository.CreateAsync(clientModel);
